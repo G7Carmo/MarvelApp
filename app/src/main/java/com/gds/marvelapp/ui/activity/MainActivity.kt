@@ -1,7 +1,7 @@
-package com.gds.marvelapp
+package com.gds.marvelapp.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.gds.marvelapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

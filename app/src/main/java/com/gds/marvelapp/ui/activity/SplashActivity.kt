@@ -1,7 +1,8 @@
-package com.gds.marvelapp
+package com.gds.marvelapp.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.gds.marvelapp.R
 import com.gds.marvelapp.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
