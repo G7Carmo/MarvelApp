@@ -22,6 +22,13 @@ abstract class BaseFragment<VB : ViewBinding,VM : ViewModel> : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onInject(savedInstanceState)
+    }
+
+    abstract fun onInject(savedInstanceState:Bundle?)
+
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     override fun onDestroy() {
