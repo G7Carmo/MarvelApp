@@ -1,8 +1,10 @@
 package com.gds.marvelapp.util
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.gds.marvelapp.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -37,4 +39,13 @@ fun Fragment.dialog(title: String,messagem: String){
             dialog.dismiss()
         }
         .show()
+}
+fun loadImage(
+    imagemView : ImageView,
+    path : String,
+    extension : String
+){
+    Glide.with(imagemView.context)
+        .load("$path.$extension")
+        .into(imagemView)
 }

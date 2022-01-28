@@ -17,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setupSplash()
+        supportActionBar?.hide()
     }
 
     private fun setupSplash() = with(binding) {

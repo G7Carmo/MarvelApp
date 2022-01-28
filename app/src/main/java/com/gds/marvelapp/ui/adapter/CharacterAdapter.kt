@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.gds.marvelapp.R
 import com.gds.marvelapp.data.model.character.CharacterModel
 import com.gds.marvelapp.databinding.ItemCharacterBinding
 import com.gds.marvelapp.ui.adapter.CharacterAdapter.CharacterViewHolder
 import com.gds.marvelapp.util.limitDescription
+import com.gds.marvelapp.util.loadImage
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
 
@@ -60,9 +60,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
             }else{
                 tvDescriptionCharacter.text = character.description.limitDescription(100)
             }
-            Glide.with(holder.itemView.context)
-                .load("${character.thumbnail.path+"."+character.thumbnail.extension}")
-                .into(imgCharacter)
+            loadImage(imgCharacter,character.thumbnail.path,character.thumbnail.extension)
         }
         holder.itemView.setOnClickListener {
             onItemClickListner?.let {
