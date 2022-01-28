@@ -1,11 +1,16 @@
 package com.gds.marvelapp.di
 
+import android.content.Context
+import androidx.room.Room
+import com.gds.marvelapp.data.local.MarvelDatabase
 import com.gds.marvelapp.data.remote.ServiceApi
 import com.gds.marvelapp.util.Constantes
 import com.gds.marvelapp.util.Constantes.BASE_URL
+import com.gds.marvelapp.util.Constantes.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -82,8 +87,16 @@ object MarvelAppModulo {
         return encryptedString ?: ""
     }
 
+    @Singleton
+    @Provides
+    fun providerDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(context,MarvelDatabase::class.java,DATABASE_NAME).build()
 
 
+    @Singleton
+    @Provides
+    fun providerDao(db : MarvelDatabase) = db.marvelDao()
 
 
 }

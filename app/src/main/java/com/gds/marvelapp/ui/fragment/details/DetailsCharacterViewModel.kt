@@ -2,6 +2,7 @@ package com.gds.marvelapp.ui.fragment.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gds.marvelapp.data.model.character.CharacterModel
 import com.gds.marvelapp.data.model.comics.ComicModelResponse
 import com.gds.marvelapp.repository.MarvelRepository
 import com.gds.marvelapp.ui.state.ResourceState
@@ -44,6 +45,10 @@ class DetailsCharacterViewModel @Inject constructor(
             }
         }
         return ResourceState.Error(response.message())
+    }
+
+    fun insert(characterModel: CharacterModel) = viewModelScope.launch {
+        repository.insert(characterModel)
     }
 
 }

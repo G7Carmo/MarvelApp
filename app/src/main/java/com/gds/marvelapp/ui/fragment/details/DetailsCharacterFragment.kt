@@ -13,10 +13,7 @@ import com.gds.marvelapp.databinding.FragmentDetailsCharacterBinding
 import com.gds.marvelapp.ui.adapter.ComicAdapter
 import com.gds.marvelapp.ui.fragment.base.BaseFragment
 import com.gds.marvelapp.ui.state.ResourceState
-import com.gds.marvelapp.util.hide
-import com.gds.marvelapp.util.limitDescription
-import com.gds.marvelapp.util.show
-import com.gds.marvelapp.util.toast
+import com.gds.marvelapp.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -29,6 +26,7 @@ class DetailsCharacterFragment :
     private val comicAdapter by lazy { ComicAdapter() }
     private lateinit var characterModel : CharacterModel
     private val args : DetailsCharacterFragmentArgs by navArgs()
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -36,11 +34,19 @@ class DetailsCharacterFragment :
         FragmentDetailsCharacterBinding.inflate(inflater, container, false)
 
     override fun onInject(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         characterModel = args.characterId
         viewModel.fetch(characterModel.id)
         setupRecyclerView()
         onLoadCharacter(characterModel)
         collectObserve()
+        binding.tvDescriptionCharacterDetails.setOnClickListener {
+            onShowDialog(characterModel)
+        }
+    }
+
+    private fun onShowDialog(characterModel: CharacterModel) {
+        dialog(characterModel.name,characterModel.description)
     }
 
     private fun collectObserve() = lifecycleScope.launch {
@@ -98,7 +104,7 @@ class DetailsCharacterFragment :
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.favorite->{
-//                viewModel.insert(characterModel)
+                viewModel.insert(characterModel)
                 toast(getString(R.string.saved_successfully))
             }
         }
